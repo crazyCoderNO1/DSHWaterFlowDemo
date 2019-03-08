@@ -1,39 +1,65 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="DSHCollectionViewCell">
-            <rect key="frame" x="0.0" y="0.0" width="86" height="100"/>
+            <rect key="frame" x="0.0" y="0.0" width="115" height="198"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="86" height="100"/>
+                <rect key="frame" x="0.0" y="0.0" width="115" height="198"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="cellID" translatesAutoresizingMaskIntoConstraints="NO" id="vaQ-A4-Gwt">
-                        <rect key="frame" x="0.0" y="0.0" width="86" height="100"/>
+                        <rect key="frame" x="0.0" y="0.0" width="115" height="158"/>
                     </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AMP-dD-7G2">
+                        <rect key="frame" x="5" y="168" width="26" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XR8-uc-Bfj">
+                        <rect key="frame" x="80" y="162" width="30" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="30" id="Fct-pC-GPp"/>
+                            <constraint firstAttribute="height" constant="30" id="g70-Bh-Z1u"/>
+                        </constraints>
+                        <state key="normal" image="unselect.png"/>
+                        <state key="selected" image="select.png"/>
+                        <connections>
+                            <action selector="dianzanButtonClick:" destination="gTV-IL-0wX" eventType="touchUpInside" id="PMX-kP-OpP"/>
+                        </connections>
+                    </button>
                 </subviews>
             </view>
             <constraints>
                 <constraint firstItem="vaQ-A4-Gwt" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="5N6-4D-oUu"/>
+                <constraint firstItem="AMP-dD-7G2" firstAttribute="top" secondItem="vaQ-A4-Gwt" secondAttribute="bottom" constant="10" id="9WY-ol-AVx"/>
+                <constraint firstAttribute="trailing" secondItem="XR8-uc-Bfj" secondAttribute="trailing" constant="5" id="GhS-jG-n8C"/>
+                <constraint firstAttribute="bottom" secondItem="vaQ-A4-Gwt" secondAttribute="bottom" constant="40" id="IsG-xf-fsj"/>
+                <constraint firstItem="XR8-uc-Bfj" firstAttribute="centerY" secondItem="AMP-dD-7G2" secondAttribute="centerY" id="ak0-E5-LX1"/>
                 <constraint firstAttribute="trailing" secondItem="vaQ-A4-Gwt" secondAttribute="trailing" id="azj-jA-Xwr"/>
-                <constraint firstAttribute="bottom" secondItem="vaQ-A4-Gwt" secondAttribute="bottom" id="mWM-cf-vqD"/>
+                <constraint firstItem="AMP-dD-7G2" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="5" id="i4e-ea-23q"/>
                 <constraint firstItem="vaQ-A4-Gwt" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="rV2-VW-1LQ"/>
             </constraints>
-            <size key="customSize" width="86" height="100"/>
+            <size key="customSize" width="115" height="198"/>
             <connections>
                 <outlet property="imageView" destination="vaQ-A4-Gwt" id="hZH-vR-k2r"/>
             </connections>
-            <point key="canvasLocation" x="-83" y="-37"/>
+            <point key="canvasLocation" x="-60" y="6.2968515742128943"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="select.png" width="200" height="200"/>
+        <image name="unselect.png" width="200" height="200"/>
+    </resources>
 </document>

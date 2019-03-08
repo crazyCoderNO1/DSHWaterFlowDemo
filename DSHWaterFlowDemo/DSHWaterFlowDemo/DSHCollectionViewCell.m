@@ -15,4 +15,9 @@
     // Initialization code
 }
 
+- (IBAction)dianzanButtonClick:(id)sender {
+    UIButton *thumbUpBtn = (UIButton *)sender;
+    thumbUpBtn.selected = !thumbUpBtn.selected;
+}
+
 @end

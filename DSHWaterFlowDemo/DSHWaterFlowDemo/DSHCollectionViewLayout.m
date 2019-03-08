@@ -46,9 +46,9 @@ static const NSUInteger defaultColumn = 2 ;
     return _columnHeightsArrays;
 }
 
+#pragma mark - 重写4个方法实现
 
-#pragma mark = 重写4个方法实现
-- (void)prepareLayout{
+- (void)prepareLayout {
     //layout 准备工作
     [super prepareLayout];
     //清空数组
@@ -69,11 +69,11 @@ static const NSUInteger defaultColumn = 2 ;
     }
 }
 
-- (NSArray<UICollectionViewLayoutAttributes *> *)layoutAttributesForElementsInRect:(CGRect)rect{
+- (NSArray<UICollectionViewLayoutAttributes *> *)layoutAttributesForElementsInRect:(CGRect)rect {
     return self.attributesArrs;
 }
 
-- (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath{
+- (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath {
     
     UICollectionViewLayoutAttributes *attributes = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
     
@@ -93,7 +93,7 @@ static const NSUInteger defaultColumn = 2 ;
 
     CGFloat x = DSHDefaultInsets.left + minColumn*(rowMargin+w);
     CGFloat y = minHeight ;
-    if (y!=DSHDefaultInsets.top) {
+    if (y != DSHDefaultInsets.top) {
         y += rowMargin ;
     }
     attributes.frame = CGRectMake(x, y, w, h);
@@ -103,7 +103,7 @@ static const NSUInteger defaultColumn = 2 ;
     return attributes;
 }
 
-- (CGSize)collectionViewContentSize{
+- (CGSize)collectionViewContentSize {
     
     //先找到最长的那一列
     CGFloat maxHeight = [self.columnHeightsArrays[0] floatValue];

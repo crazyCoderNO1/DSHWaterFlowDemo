@@ -16,79 +16,55 @@ static NSString *const cellID = @"cellID";
 @interface ViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,DSHCollectionViewLayoutDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
-@property (strong,nonatomic)NSArray *itemsArray; //模型数组
+@property (strong, nonatomic) NSMutableArray *itemsArray; //模型数组
+@property (strong, nonatomic) NSMutableArray *imageViewsArray;
 
 @end
 
 @implementation ViewController
 
-- (NSArray *)itemsArray{
-    if (!_itemsArray) {
-        _itemsArray = [[NSArray alloc]init];
-    }
-    return _itemsArray;
-}
-
-
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    self.itemsArray = [NSMutableArray arrayWithCapacity:10];
+    self.imageViewsArray = [NSMutableArray arrayWithCapacity:10];
     
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"1" ofType:@"plist"];
-    self.itemsArray = [NSArray arrayWithContentsOfFile:path];
+    for (int i = 3951; i < 3990; ++i) {
+        NSString *imageStr = [NSString stringWithFormat:@"IMG_%@.PNG",@(i)];
+        UIImage *image = [UIImage imageNamed:imageStr];
+        UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
+        [self.itemsArray addObject:image];
+        [self.imageViewsArray addObject:imageView];
+    }
     DSHCollectionViewLayout *layout = [[DSHCollectionViewLayout alloc]init] ;
     layout.delegate = self;
     self.collectionView.collectionViewLayout  = layout;
-//    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:cellID];
-    [self.collectionView registerNib:[UINib nibWithNibName:@"DSHCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:cellID];
-    
+    [self.collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([DSHCollectionViewCell class]) bundle:nil] forCellWithReuseIdentifier:cellID];
 }
 
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return self.itemsArray.count;
 }
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-    
-    NSDictionary *dic = self.itemsArray[indexPath.row];
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellID forIndexPath:indexPath];
-    
-   /*
-    cell.backgroundColor = [UIColor redColor];
-    NSDictionary *dic = self.itemsArray[indexPath.row];
-    [cell.imageView sd_setImageWithURL:[NSURL URLWithString:dic[@"img"]]];
-   */
-    
-    for (UIView *view in cell.contentView.subviews) {
-     [view removeFromSuperview];
-     }
-    UIImageView *imageView =[[UIImageView alloc]init];
-    [imageView sd_setImageWithURL:[NSURL URLWithString:dic[@"img"]]];
-    [cell.contentView addSubview:imageView];
-    //VFL
-    imageView.translatesAutoresizingMaskIntoConstraints = NO;
-    NSMutableArray *layoutArr = [NSMutableArray array];
-    NSString *VisualFormats[2];
-    VisualFormats[0] = @"H:|[imageView]|";
-    VisualFormats[1] = @"V:|[imageView]|";
-    NSDictionary *imageViews = NSDictionaryOfVariableBindings(imageView);
-    for (NSInteger i =0;i<2;i++) {
-      [layoutArr addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:VisualFormats[i] options:kNilOptions metrics:nil views:imageViews]];
-    }
-    [NSLayoutConstraint activateConstraints:layoutArr];
-     
-    
-    
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    DSHCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellID forIndexPath:indexPath];
+    UIImageView *imageView = self.imageViewsArray[indexPath.row];
+    cell.imageView.image = imageView.image;
     
     return cell;
 }
 
-- (CGFloat)DSHCollectionViewLayoutHeightForIndexPath:(NSIndexPath *)indexPath width:(CGFloat)width{
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    NSDictionary *dic = self.itemsArray[indexPath.row];
-    CGFloat w = [dic[@"w"] floatValue];
-    CGFloat h = [dic[@"h"] floatValue];
+}
+
+- (CGFloat)DSHCollectionViewLayoutHeightForIndexPath:(NSIndexPath *)indexPath width:(CGFloat)width {
     
-    return width * h / w ;
+    UIImageView *imageView = self.imageViewsArray[indexPath.row];
+    CGFloat w = imageView.frame.size.width;
+    CGFloat h = imageView.frame.size.height;
+    
+    return width * h / w + 40;
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
